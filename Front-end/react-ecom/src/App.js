@@ -30,6 +30,7 @@ import UpdateUser from './Components/pages/admin/UpdateUser';
 import Order from './Components/pages/admin/Order';
 import UpdateOrder from './Components/pages/admin/UpdateOrder';
 import Category from './Components/pages/admin/Category';
+import SearchBarProduct from './Components/SearchBarProduct';
 
 const sayHello = () => {
   alert("Hello,How are you");
@@ -67,7 +68,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="store/:categoryId" element={<Store />} />
           <Route path="viewProduct/:productId" element={<Viewproduct />} />
-
+          <Route path="/searchbar" element={<SearchBarProduct/>} />
           {/* Admin-DashBoard Start */}
 
           <Route path="/admin-dashboard" element={<Admindashboard />}>

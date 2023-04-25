@@ -1,9 +1,9 @@
 package com.ecom.payload;
 
 public class CategoryDto {
-	     
-private int categoryId;
-	
+
+	private int categoryId;
+
 	private String title;
 
 	public CategoryDto() {
@@ -32,6 +32,5 @@ private int categoryId;
 	public void setTitle(String title) {
 		this.title = title;
 	}
-
 
 }

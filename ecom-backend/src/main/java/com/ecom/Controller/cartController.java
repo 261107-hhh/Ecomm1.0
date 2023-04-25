@@ -27,30 +27,28 @@ public class cartController {
 	@Autowired
 	CartService cartservice;
 
-	//String username = "malit@gmail.com";
+	// String username = "malit@gmail.com";
 	@PostMapping("/")
-	public ResponseEntity<CartDto> addItem(@RequestBody ItemRequest itemRequest,Principal principal) {
+	public ResponseEntity<CartDto> addItem(@RequestBody ItemRequest itemRequest, Principal principal) {
 
-		CartDto addItem = this.cartservice.addItem(itemRequest,principal.getName());
+		CartDto addItem = this.cartservice.addItem(itemRequest, principal.getName());
 
 		return new ResponseEntity<CartDto>(addItem, HttpStatus.OK);
 	}
+
 	@GetMapping("/")
-	public ResponseEntity<CartDto> getCart(Principal principal){
-		
+	public ResponseEntity<CartDto> getCart(Principal principal) {
+
 		CartDto item = this.cartservice.getCart(principal.getName());
-		
-		return new ResponseEntity<CartDto>(item,HttpStatus.OK);
+
+		return new ResponseEntity<CartDto>(item, HttpStatus.OK);
 	}
-	
-	
+
 	@PutMapping("/{productId}")
-	public ResponseEntity<CartDto> removeProduct(@PathVariable int  productId,Principal principal){
+	public ResponseEntity<CartDto> removeProduct(@PathVariable int productId, Principal principal) {
 		CartDto removeCartItem = this.cartservice.removeCartItem(principal.getName(), productId);
-		
-		return new ResponseEntity<CartDto>(removeCartItem,HttpStatus.ACCEPTED);
+
+		return new ResponseEntity<CartDto>(removeCartItem, HttpStatus.ACCEPTED);
 	}
-	
-	
 
 }

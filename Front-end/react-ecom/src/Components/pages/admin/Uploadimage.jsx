@@ -4,7 +4,9 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { CardHeader, Card, Container, Label, CardBody, Input, CardFooter, Button } from "reactstrap";
 import { uploadProductImage } from '../../../Service/product-service'
+import { useNavigate } from 'react-router-dom'
 function Uploadimage() {
+    const navigate = useNavigate()
     const [product, setProduct] = useState(null);
     const [images, setImages] = useState(null);
 
@@ -21,6 +23,7 @@ function Uploadimage() {
 
         uploadProductImage(images, product.productId).then(data => {
             toast.success("upload Image")
+            navigate("/store/all")
         }).catch(error => {
             console.log(error)
             if (error.response.data.message === "User id is not present here") {

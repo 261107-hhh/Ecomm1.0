@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
-import { NavLink as ReactLink } from 'react-router-dom'
+import { NavLink as ReactLink, useNavigate } from 'react-router-dom'
+import SearchBarProduct from './SearchBarProduct'
 import {
   Collapse,
   Navbar,
@@ -17,14 +18,60 @@ import {
 } from 'reactstrap';
 import { checkLogin, getCurrentUser, logout, adminLogin } from '../auth'
 import { context1 } from './Context';
-
+import { searchProduct } from '../Service/product-service';
+import { toast } from "react-toastify";
+import Product from './Product';
 
 
 function CustomNavbar(value) {
   const [isOpen, setIsOpen] = useState(false);
   const value1 = useContext(context1)
+  const navigate = useNavigate();
 
   const toggle = () => setIsOpen(!isOpen);
+
+  const [prod, setProd] = useState(null)
+
+  const [productName, setProductName] = useState("");
+  
+  const searchProducts = (event) => {
+    event.preventDefault();
+    // console.log(event.target.value)
+    // const val = event.target.value;
+    // {<SearchBarProduct  setProd= {val}/>}
+    // navigate(`/searchbar`)
+
+
+    searchProduct(event).then(data => {
+      // navigate(`{"/store/data."}`)
+      const val = data;
+      const id = (val[0].category.categoryId)
+      console.log(data)
+      setProd(data);
+      // {<SearchBarProduct  setProd= {data}/>}
+      
+      // navigate(`/searchbar`)
+      // getProduct()
+      setProductName(event.target.value);
+
+      if (data.length === 0) {
+        // toast.error("product not found")
+
+        navigate("/store/all")
+        setProductName(event.target.value);
+      }
+      // console.log(images)
+    }
+    ).catch(error => {
+      console.log(error)
+
+      setProductName(event.target.value);
+      navigate("/store/all")
+    })
+
+
+  }
+
   const htmlData = () => {
     return (
       <div>
@@ -41,13 +88,36 @@ function CustomNavbar(value) {
               </NavItem>
 
             </Nav>
-
+            <input type="text" placeholder="Search Product"
+              onChange={(e) => {
+                setProductName(e.target.value)
+                searchProducts(e)
+              }}
+              value={productName}
+              style={{
+                "border": ".5px solid grey",
+                "height": "2.5rem",
+                "width": "16rem"
+              }} />
+            {/* <input
+              type="text"
+              placeholder="Product Name"
+              onChange={(e) => {
+                setProductName(e.target.value)
+                searchProducts(e)
+              }}
+              value={productName}
+            /> */}
             <Nav Navbar>
-              <NavItem>
-                <NavLink tag={ReactLink} to="/user/cart">
-                  <b>Cart({value1.cart.iteam.length})</b>
-                </NavLink>
-              </NavItem>
+              {checkLogin() && (
+                <>
+                  <NavItem>
+                    <NavLink tag={ReactLink} to="/user/cart">
+                      <b>Cart({value1.cart.iteam.length})</b>
+                    </NavLink>
+                  </NavItem>
+                </>
+              )}
 
               {(!checkLogin()) && (
                 <>
@@ -66,6 +136,7 @@ function CustomNavbar(value) {
                   </Nav>
                 </>
               )}
+
 
 
 
@@ -92,7 +163,7 @@ function CustomNavbar(value) {
                   </NavItem>
 
                   <NavItem>
-                    <NavLink tag={ReactLink} to="/store/All">
+                    <NavLink tag={ReactLink} to="/store/all">
                       <Button color='danger' onClick={logout}>Logout</Button>
                     </NavLink>
                   </NavItem>

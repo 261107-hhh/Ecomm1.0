@@ -1,5 +1,3 @@
-//baseon localStorage
-//login
 
 export const login = (data,next) => {
   localStorage.setItem("data", JSON.stringify(data));

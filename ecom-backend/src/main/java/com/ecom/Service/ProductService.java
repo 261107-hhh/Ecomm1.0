@@ -14,7 +14,7 @@ public interface ProductService {
 	public ProductDto getProduct(int productId);
 	public int deleteProduct(int pid);
 	public ProductDto updateProduct(int productId,ProductDto newproduct);
-	  ProductResponse getProductByCatgory(int categoryId,int pageSize,int pageNumber);
+	public ProductResponse getProductByCatgory(int categoryId,int pageSize,int pageNumber);
 	public List<ProductDto> findProduct(String pname);
 
 

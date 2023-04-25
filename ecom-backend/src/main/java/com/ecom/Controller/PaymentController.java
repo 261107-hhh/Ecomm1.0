@@ -31,7 +31,7 @@ public class PaymentController {
 		JSONObject option=new JSONObject();
 		option.put("amount",price*100);
 		option.put("currency","INR");
-		option.put("receipt","vk123");
+		option.put("receipt","HN Shopping Store");
 		Order order = client.Orders.create(option);
 		System.out.println(order);
 		

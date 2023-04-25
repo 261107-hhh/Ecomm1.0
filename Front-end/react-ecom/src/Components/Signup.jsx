@@ -158,13 +158,15 @@ function Signup() {
 
                     <div className='my-3'>
                       <Label for="mobileNo">Enter your Mobile Number</Label>
-                      {/* <Input type="number" id="phone" placeholder='Enter your Mobile Number'
+                      {/* <Input type="number" id="phone" placeholder='Phone Number'
                         onChange={(event) => onFieldChange(event, 'phone')}
-                        value={user.phone} required
-                      /> */}
-                      <Input type="tel" id="phone" value={user.phone} placeholder="Phone Number"
-                        onChange={(event) => onFieldChange(event, 'phone')}
+                        value={user.phone} 
                         pattern="[0-9]{10}"
+                        required
+                      /> */}
+                      <Input type="telephone" id="phone" value={user.phone} placeholder="Phone Number"
+                        onChange={(event) => onFieldChange(event, 'phone')}
+                        pattern ="[0-9]{10}"
                         required
 
                       />

@@ -9,6 +9,7 @@ public interface CartService {
 	
 	CartDto addItem(ItemRequest item,String UserName);
 	CartDto getCart(String UserName);
+	CartDto removeCart(String UserName);
 	CartDto  removeCartItem(String UserName,int productId);
 
 }

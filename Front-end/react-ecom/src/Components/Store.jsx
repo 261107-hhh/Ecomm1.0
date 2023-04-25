@@ -21,7 +21,7 @@ function Store() {
   const [flag, setFlag] = useState(true)
 
   useEffect(() => {
-    if (flag == true) {
+    if (flag === true) {
       console.log("intial Time")
       getCategories()
       setFlag(false)
@@ -90,9 +90,6 @@ function Store() {
   }
 
 
-
-
-
   const getInfiniteScrollWithContent = () => {
     return (<InfiniteScroll
       dataLength={productDetails.content.length}
@@ -104,14 +101,10 @@ function Store() {
       <Row>
 
         {
-
           (productDetails) &&
-
-
           productDetails.content.map((item, index) => (
             <Col md="6" lg="4" >
               <Product key={index} addToCart={addItemToCart} product={item} />
-
             </Col>
           ))
         }
@@ -125,9 +118,9 @@ function Store() {
 
 
   const myStyle = {
-    // backgroundImage:"url('https://img.freepik.com/free-photo/box-market-electronic-ordering-shop-basket_1421-567.jpg?w=996&t=st=1679485879~exp=1679486479~hmac=c784bbbc4eb07724200ba010aba07d15e6caf19fa7cb3c9c25431651e3d0b302')",
-    backgroundColor:"#EFEEDB",
-    height: '100vh',
+    backgroundImage: "url('https://img.freepik.com/free-photo/box-market-electronic-ordering-shop-basket_1421-567.jpg?w=996&t=st=1679485879~exp=1679486479~hmac=c784bbbc4eb07724200ba010aba07d15e6caf19fa7cb3c9c25431651e3d0b302')",
+    backgroundColor: "#EFEEDB",
+    // height: '100vh',
     marginTop: '0px',
     fontSize: '10px',
     backgroundSize: 'cover',
@@ -150,7 +143,7 @@ function Store() {
             </Card>
 
 
-            <ListGroup>
+            <ListGroup style={{ 'position': 'stick', 'width': '100%' }}>
               <ListGroupItem action tag={Link} to={'/store/all'}>
                 <h4 className='text-center'><b><Alert color='warning'>All</Alert></b></h4>
               </ListGroupItem>
@@ -171,7 +164,7 @@ function Store() {
             </ListGroup>
           </Col>
 
-          <Col md="9">
+          <Col md="8" style={{'marginLeft':'22px'}}>
             <h2>Product</h2>
             {productDetails && getInfiniteScrollWithContent()}
 

@@ -7,7 +7,10 @@ import { loadCategories } from "../../../Service/category-service";
 import { addproduct, uploadProductImage } from "../../../Service/product-service"
 import JoditEditor from 'jodit-react';
 import React, { useRef, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom'
 function Addproduct() {
+
+    const navigate = useNavigate()
     const [category, setCategory] = useState([])
     const [product, setProduct] = useState([])
     const editor = useRef(null);
@@ -34,6 +37,7 @@ function Addproduct() {
             console.log(data)
             console.log(images)
             toast.success("Product Added Successfully")
+            navigate("/store/all")
         }
         ).catch(error => {
             console.log(error)

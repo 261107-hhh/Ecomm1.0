@@ -27,42 +27,45 @@ import com.ecom.payload.CategoryDto;
 @RequestMapping("/cat")
 @CrossOrigin("*")
 public class CategoryServiceController {
-	
-	       @Autowired
-	      private CategoryService categoryService;
-   @PreAuthorize("hasRole('ADMIN')")   
+
+	@Autowired
+	private CategoryService categoryService;
+
+	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/")
-	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto cdto ) {
-		CategoryDto cdtoCreate=categoryService.Create(cdto);
-		return new ResponseEntity<CategoryDto>(cdtoCreate,HttpStatus.CREATED);
+	public ResponseEntity<CategoryDto> createCategory(@Valid @RequestBody CategoryDto cdto) {
+		CategoryDto cdtoCreate = categoryService.Create(cdto);
+		return new ResponseEntity<CategoryDto>(cdtoCreate, HttpStatus.CREATED);
 	}
-   @PreAuthorize("hasRole('ADMIN')")   
+
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
-	ResponseEntity<CategoryDto> Update(@RequestBody CategoryDto cdto ,@PathVariable int id){
-		  
-		CategoryDto updateCategory=categoryService.updateCategory(id, cdto);
-		
-		return new ResponseEntity<CategoryDto>(updateCategory,HttpStatus.ACCEPTED);
+	ResponseEntity<CategoryDto> Update(@RequestBody CategoryDto cdto, @PathVariable int id) {
+
+		CategoryDto updateCategory = categoryService.updateCategory(id, cdto);
+
+		return new ResponseEntity<CategoryDto>(updateCategory, HttpStatus.ACCEPTED);
 	}
-	
+
 	@GetMapping("/")
-	ResponseEntity<List<CategoryDto>> getAll(){
+	ResponseEntity<List<CategoryDto>> getAll() {
 		List<CategoryDto> allCategory = this.categoryService.getAllCategory();
-		return new ResponseEntity<List<CategoryDto>>(allCategory,HttpStatus.OK) ;
+		return new ResponseEntity<List<CategoryDto>>(allCategory, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/single/{id}")
-	ResponseEntity<CategoryDto>getSingle(@Valid @PathVariable int id){
-		
+	ResponseEntity<CategoryDto> getSingle(@Valid @PathVariable int id) {
+
 		CategoryDto categoryByid = this.categoryService.getCategoryByid(id);
-		
-		return new ResponseEntity<CategoryDto>(categoryByid,HttpStatus.OK);
+
+		return new ResponseEntity<CategoryDto>(categoryByid, HttpStatus.OK);
 	}
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("/{id}")
-	ResponseEntity<ApiResponse>delete(@Valid @PathVariable int id){
-	         this.categoryService.deleteCategory(id);
-		return new ResponseEntity<ApiResponse>(new ApiResponse("User Delete"+id,true),HttpStatus.OK);
+	ResponseEntity<ApiResponse> delete(@Valid @PathVariable int id) {
+		this.categoryService.deleteCategory(id);
+		return new ResponseEntity<ApiResponse>(new ApiResponse("User Delete" + id, true), HttpStatus.OK);
 	}
 
 }

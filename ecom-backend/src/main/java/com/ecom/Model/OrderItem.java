@@ -10,9 +10,10 @@ import javax.persistence.OneToOne;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class OrderItem {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderItemId;
@@ -22,7 +23,7 @@ public class OrderItem {
 	private int quantity;
 	@JsonBackReference
 	@ManyToOne
-    private	Order order;
+	private Order order;
 
 	public int getOrderItemId() {
 		return orderItemId;
@@ -64,5 +65,4 @@ public class OrderItem {
 		this.order = order;
 	}
 
-	
 }

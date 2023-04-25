@@ -41,119 +41,111 @@ import com.ecom.config.AppConstants;
 public class ProductController {
 
 	@Autowired
-private FileUploadImp fileUpload;
+	private FileUploadImp fileUpload;
 	@Autowired
-private	ProductService productService;
-	
-@Value("${product.images.path}")
-private String imagePath;
-	
+	private ProductService productService;
+
+	@Value("${product.images.path}")
+	private String imagePath;
+
 // upload the product Images
 
-@PostMapping("products/images/{productId}")	
-public ResponseEntity<?>uploadImageOfProduct(@PathVariable int productId,
-		@RequestParam("product_image") MultipartFile file ) throws Exception{
+	@PostMapping("products/images/{productId}")
+	public ResponseEntity<?> uploadImageOfProduct(@PathVariable int productId,
+			@RequestParam("product_image") MultipartFile file) throws Exception {
 		System.out.println(productId);
-	  ProductDto product = this.productService.getProduct(productId);
-	  
-		String imageName=null;
-		
+		ProductDto product = this.productService.getProduct(productId);
+
+		String imageName = null;
+
 		try {
-			
-			 imageName = this.fileUpload.uploadFile(imagePath,file);
+
+			imageName = this.fileUpload.uploadFile(imagePath, file);
 			product.setImageName(imageName);
-			ProductDto updateProduct= this.productService.updateProduct(productId,product);
-			return new ResponseEntity<>(updateProduct,HttpStatus.ACCEPTED);
+			ProductDto updateProduct = this.productService.updateProduct(productId, product);
+			return new ResponseEntity<>(updateProduct, HttpStatus.ACCEPTED);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return new ResponseEntity<>(Map.of("message","File not upload on server"),HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(Map.of("message", "File not upload on server"),
+					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-	  
-	 
-	  
-	  
+
 	}
-	
 
-@GetMapping("/products/images/{productId}")
-public void downloadImage(@PathVariable int productId, HttpServletResponse response) throws IOException {
-    ProductDto product = this.productService.getProduct(productId);
-    String imageName = product.getImageName();
-    String fullPath = imagePath + File.separator + imageName;
-    InputStream resource = this.fileUpload.getResource(fullPath);
-    response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-    OutputStream outputStream = response.getOutputStream();
-    StreamUtils.copy(resource, outputStream);
-}
+	@GetMapping("/products/images/{productId}")
+	public void downloadImage(@PathVariable int productId, HttpServletResponse response) throws IOException {
+		ProductDto product = this.productService.getProduct(productId);
+		String imageName = product.getImageName();
+		String fullPath = imagePath + File.separator + imageName;
+		InputStream resource = this.fileUpload.getResource(fullPath);
+		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+		OutputStream outputStream = response.getOutputStream();
+		StreamUtils.copy(resource, outputStream);
+	}
 
-
-	
 	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("categories/{categoryId}/product/")
-	public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto,@PathVariable int categoryId) {
-		   
-		     ProductDto createProduct = productService.createProduct(productDto,categoryId);
-		   
-		return new ResponseEntity<ProductDto>(createProduct,HttpStatus.CREATED);
+	public ResponseEntity<ProductDto> createProduct(@RequestBody ProductDto productDto, @PathVariable int categoryId) {
+
+		ProductDto createProduct = productService.createProduct(productDto, categoryId);
+
+		return new ResponseEntity<ProductDto>(createProduct, HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("product/")
 	public ProductResponse viewAllProduct(
-				
-			@RequestParam(value="pageNumber",defaultValue="1",required = false) int pageNumber,
-			@RequestParam(value="pageSize",defaultValue="2",required = false) int pageSize,
-			@RequestParam(value="sortBy",defaultValue=AppConstants.SORT_BY_STRING ,required=false) String sortBy,
-			@RequestParam(value="sortDir",defaultValue = AppConstants.SORT_DIR_STRING,required =false)String sortDir 
-			
-			){
-		   ProductResponse allproduct= productService.getAllProducts(pageNumber,pageSize,sortBy,sortDir);
+
+			@RequestParam(value = "pageNumber", defaultValue = "1", required = false) int pageNumber,
+			@RequestParam(value = "pageSize", defaultValue = "2", required = false) int pageSize,
+			@RequestParam(value = "sortBy", defaultValue = AppConstants.SORT_BY_STRING, required = false) String sortBy,
+			@RequestParam(value = "sortDir", defaultValue = AppConstants.SORT_DIR_STRING, required = false) String sortDir
+
+	) {
+		ProductResponse allproduct = productService.getAllProducts(pageNumber, pageSize, sortBy, sortDir);
 		return allproduct;
 	}
-	
+
 	@GetMapping("product/{product_id}")
 	public ResponseEntity<ProductDto> getProductById(@PathVariable int product_id) {
-		
-	      ProductDto productDto=productService.getProduct(product_id);
-		
-		return new ResponseEntity<ProductDto>(productDto,HttpStatus.OK);
+
+		ProductDto productDto = productService.getProduct(product_id);
+
+		return new ResponseEntity<ProductDto>(productDto, HttpStatus.OK);
 	}
+
 	@PreAuthorize("hasRole('ADMIN')")
 	@DeleteMapping("product/{product_id}")
 	public ResponseEntity<ApiResponse> deleteProduct(@PathVariable int product_id) {
-			int a=productService.deleteProduct(product_id);
-		
-		return new ResponseEntity<ApiResponse>(new ApiResponse("Iteam Deleted",true),HttpStatus.OK);
+		int a = productService.deleteProduct(product_id);
+
+		return new ResponseEntity<ApiResponse>(new ApiResponse("Iteam Deleted", true), HttpStatus.OK);
 	}
-	
-	
+
 	@PutMapping("product/{productId}")
-	public ResponseEntity<ProductDto> update(@PathVariable int productId,@RequestBody ProductDto newproduct) {
-		
-		  ProductDto p=productService.updateProduct(productId, newproduct);
-		return new ResponseEntity<ProductDto>(p,HttpStatus.OK);
+	public ResponseEntity<ProductDto> update(@PathVariable int productId, @RequestBody ProductDto newproduct) {
+
+		ProductDto p = productService.updateProduct(productId, newproduct);
+		return new ResponseEntity<ProductDto>(p, HttpStatus.OK);
 	}
-	
-	
+
 	@GetMapping("category/{categoryId}/product")
 	public ProductResponse findByCategory(@PathVariable int categoryId,
-			 @RequestParam(value="pageSize",defaultValue="2")	  int pageSize,
-			 @RequestParam(value="pageNumber",defaultValue="1")   int pageNumber
-			){
-		
-		ProductResponse productByCatgory =  this.productService.getProductByCatgory(categoryId, pageSize,pageNumber);
+			@RequestParam(value = "pageSize", defaultValue = "2") int pageSize,
+			@RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber) {
+
+		ProductResponse productByCatgory = this.productService.getProductByCatgory(categoryId, pageSize, pageNumber);
 		return productByCatgory;
-	
+
 	}
-	
+
 	@GetMapping("product/search/{name}")
-	public ResponseEntity<List<ProductDto>> findbyName(@PathVariable String name ){
-		
-		System.out.print(name);
-		List <ProductDto> findProduct = this.productService.findProduct(name);
-		
-		
-		return new ResponseEntity<List<ProductDto>>(findProduct,HttpStatus.OK);
+	public ResponseEntity<List<ProductDto>> findbyName(@PathVariable String name) {
+
+		System.out.println(name);
+		List<ProductDto> findProduct = this.productService.findProduct(name);
+
+		return new ResponseEntity<List<ProductDto>>(findProduct, HttpStatus.OK);
 	}
 
 }

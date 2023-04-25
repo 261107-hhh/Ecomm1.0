@@ -107,81 +107,91 @@ function Dashboard() {
     )
   }
 
+  // const myStyle = {
+  //   backgroundImage: "url('Images/cemra.png')",
+  //   height: '90vh',
+  //   // backgroundColor: 'rebeccapurple'
+  // }
   const myStyle = {
-    backgroundImage: "url('Images/cemra.png')",
-    height: '90vh',
-    // backgroundColor: 'rebeccapurple'
+    backgroundImage: "url('Images/Store.jpg')",
+    height: "93vh",
+    // backgroundColor: "red"
   }
 
   const htmlOrder = () => {
     return (
 
+      <>
 
-      <Row>
-        <div style={{ width: '100%', height: '', backgroundImage: "url('Images/cemra.png')" }}>
-          <Card style={{
-            display: 'table',
-            width: 'auto',
-            marginTop: '52px',
-            marginLeft: '37%',
-            color: 'red'
-            //  width: 390, marginTop: 50, marginLeft: '35%', color: 'red' 
-          }}><h1>Your Order Details</h1></Card>
-          <Col md={{ size: 8, offset: 2 }} style={{ marginTop: 12 }}>
-            {order.map(order => (
-              <Card key={order.orderId} style={{ marginTop: 10 }} className={order.paymentStatus == 'PAID' ? 'border-success mt-2' : 'border-danger mt-2'}>
-                <CardBody className='text-center' >
-                  <Row>
-                    <Col md={5}>
-                      <CardText>
-                        <h5>ORDER NUMBER  :{" " + order.orderId}</h5>
-                      </CardText>
-                    </Col>
+        {/* <div style={myStyle}>
 
-                    <Col md={5}>
-                      <CardText style={{ marginLeft: 75 }}>
-                        <b> Create At:{formatDate(order.orderCreated)}</b>
-                      </CardText>
-                    </Col>
+        </div> */}
+        <Row>
+          <div style={{ width: '100%', height: '', backgroundImage: "url('Images/cemra.png')" }}>
+            <Card style={{
+              display: 'table',
+              width: 'auto',
+              marginTop: '52px',
+              marginLeft: '37%',
+              color: 'red'
+              //  width: 390, marginTop: 50, marginLeft: '35%', color: 'red' 
+            }}><h1>Your Order Details</h1></Card>
+            <Col md={{ size: 8, offset: 2 }} style={{ marginTop: 12 }}>
+              {order.map(order => (
+                <Card key={order.orderId} style={{ marginTop: 10 }} className={order.paymentStatus == 'PAID' ? 'border-success mt-2' : 'border-danger mt-2'}>
+                  <CardBody className='text-center' >
+                    <Row>
+                      <Col md={5}>
+                        <CardText>
+                          <h5>ORDER NUMBER  :{" " + order.orderId}</h5>
+                        </CardText>
+                      </Col>
 
-                    <Col md={5}>
-                      <CardText>
-                        <h7> ADDRESS :{order.billingAddress}  </h7>
-                      </CardText>
-                    </Col>
-                    <Col md={5} style={{ marginLeft: 80 }}>
-                      <CardText >
-                        <h7>Payment Status : <b className={order.paymentStatus == 'PAID' ? 'text-success' : 'text-danger'}>{order.paymentStatus}</b> </h7>
-                      </CardText>
-                    </Col>
-                    <Col md={5}>
-                      <CardText md={5}>
-                        <h7>Order Status :    {order.orderStatus}</h7>
-                      </CardText>
-                    </Col>
-                    <Col md={5} style={{ marginLeft: 80 }}>
-                      <CardText>
-                        <h7>order Delivered:{order.orderDelivered ? formatDate(order.orderDelivered) : 'Order Not Deliver'}</h7>
-                      </CardText>
-                    </Col>
+                      <Col md={5}>
+                        <CardText style={{ marginLeft: 75 }}>
+                          <b> Create At:{formatDate(order.orderCreated)}</b>
+                        </CardText>
+                      </Col>
 
-                    <Col md={5}>
-                      <CardText >
-                        <h7>Bill Amount</h7>  :<b style={{ color: 'red' }}>{"₹" + order.orderAmout}</b>
-                      </CardText>
-                    </Col>
-                  </Row>
-                  <Container>
-                    {order.paymentStatus == "Not Piad" ? <Button color='success' size='sm'>Pay Now</Button> : ""}
-                    <Button size='sm' onClick={() => openModal(order)} color='primary' className='ms-3'>View Product</Button>
-                  </Container>
-                </CardBody>
+                      <Col md={5}>
+                        <CardText>
+                          <h7> ADDRESS :{order.billingAddress}  </h7>
+                        </CardText>
+                      </Col>
+                      <Col md={5} style={{ marginLeft: 80 }}>
+                        <CardText >
+                          <h7>Payment Status : <b className={order.paymentStatus == 'PAID' ? 'text-success' : 'text-danger'}>{order.paymentStatus}</b> </h7>
+                        </CardText>
+                      </Col>
+                      <Col md={5}>
+                        <CardText md={5}>
+                          <h7>Order Status :    {order.orderStatus}</h7>
+                        </CardText>
+                      </Col>
+                      <Col md={5} style={{ marginLeft: 80 }}>
+                        <CardText>
+                          <h7>order Delivered:{order.orderDelivered ? formatDate(order.orderDelivered) : 'Order Not Deliver'}</h7>
+                        </CardText>
+                      </Col>
 
-              </Card>
-            ))}
-          </Col>
-        </div>
-      </Row>
+                      <Col md={5}>
+                        <CardText >
+                          <h7>Bill Amount</h7>  :<b style={{ color: 'black' }}>{"₹" + order.orderAmout}</b>
+                        </CardText>
+                      </Col>
+                    </Row>
+                    <Container>
+                      {order.paymentStatus == "Not Paid" ? <Button color='success'size='sm'>Pay Now</Button> : ""}
+                      <Button size='sm' onClick={() => openModal(order)} color='primary' className='ms-3'>View Product</Button>
+                    </Container>
+                  </CardBody>
+
+                </Card>
+              ))}
+            </Col>
+          </div>
+        </Row>
+      </>
     )
   }
   return (

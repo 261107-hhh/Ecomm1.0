@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { Container,Card, CardBody, CardText, Label,Input, Button} from "reactstrap";
 import { createCategory } from "../../../Service/category-service";
+import { useNavigate } from 'react-router-dom'
 function Addcategory(){
+    const navigate = useNavigate()
     const[cat,setCat]=useState(null);
     const addTitle=()=>{
         createCategory(cat.title).then(data=>{
             console.log(data);
             toast.success("Category Add successfully")
+            setCat('')
+            navigate("/admin-dashboard/cat")
         }).catch(error=>{
             console.log(error)
         })
@@ -16,7 +20,7 @@ return(
         <Container>
             <Card color="light">
                 <CardBody >
-                    {JSON.stringify(cat)}
+                    {/* {JSON.stringify(cat)} */}
                     <CardText className="text-center">
                     <label><b><h3>Add Category</h3> </b></label>
                     </CardText>

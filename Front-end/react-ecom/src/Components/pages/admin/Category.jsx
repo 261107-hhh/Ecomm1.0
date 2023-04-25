@@ -4,8 +4,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { CardBody, Container, Card, Row, Col, Table, Button } from "reactstrap";
 import { loadCategories, deleteCategory } from "../../../Service/category-service"
-
 function Category() {
+    
     const [cat, setCat] = useState(null)
     useEffect(() => {
         loadCategories().then(data => {

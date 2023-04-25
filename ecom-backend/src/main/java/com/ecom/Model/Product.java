@@ -16,22 +16,22 @@ import javax.persistence.Table;
 import org.springframework.boot.autoconfigure.AutoConfigureOrder;
 
 @Entity
-@Table(name="com.Product")   //@Table we can table name
+@Table(name = "com.Product") // @Table we can table name
 public class Product {
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int    productId;
-	@Column(name="product_brand_name",length=300,unique=true)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int productId;
+	@Column(name = "product_brand_name", length = 300, unique = true)
 	private String productName;
 	private String productDesc;
 	private double productPrize;
-	private boolean stock=true;
+	private boolean stock = true;
 	private int productQuantity;
 	private boolean live;
-	
+
 	private String imageName;
-	
-	@ManyToOne(fetch=FetchType.EAGER)
+
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Category category;
 
 	public int getProductId() {
@@ -90,9 +90,6 @@ public class Product {
 		this.live = live;
 	}
 
-
-
-
 	public String getImageName() {
 		return imageName;
 	}
@@ -109,7 +106,5 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
-	
 
-	
 }

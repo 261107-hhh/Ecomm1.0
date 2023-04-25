@@ -38,10 +38,7 @@ private RoleRepository roleRepository;
 			Role role1=new Role();
 			role1.setId(7412);
 			role1.setName("ROLE_NORMAL");
-			
-			Role role3=new Role();
-			role3.setId(9632);
-			role3.setName("ROLE_STAFF");
+
 			
 			//this.roleRepository.saveAll(List.of(role1,role2,role3));//this Feather to words 9
 			
@@ -53,7 +50,6 @@ private RoleRepository roleRepository;
 			  List<Role> role=new ArrayList<>();
 			  role.add(role0);
 			  role.add(role1);
-			  role.add(role3);
 			 this.roleRepository.saveAll(role);
 			  
 

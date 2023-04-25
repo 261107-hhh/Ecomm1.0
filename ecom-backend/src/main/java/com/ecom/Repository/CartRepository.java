@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.ecom.Model.Cart;
 import com.ecom.Model.User;
 
-public interface CartRepository extends JpaRepository<Cart,Integer> {
-	 Optional<Cart> findByUser(User user);
+public interface CartRepository extends JpaRepository<Cart, Integer> {
+	Optional<Cart> findByUser(User user);
 
 }

@@ -11,9 +11,10 @@ import org.springframework.stereotype.Service;
 import com.ecom.Exception.ResourceNotFoundException;
 import com.ecom.Model.User;
 import com.ecom.Repository.UserRepository;
+
 @Service
-public class CustomUserDetailsService implements UserDetailsService{
-	
+public class CustomUserDetailsService implements UserDetailsService {
+
 	@Autowired
 	UserRepository userRepo;
 
@@ -21,11 +22,9 @@ public class CustomUserDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// Load user From database
 		System.out.println("loading user from database");
-		User findByEmail = this.userRepo.findByEmail(username).orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
+		User findByEmail = this.userRepo.findByEmail(username)
+				.orElseThrow(() -> new ResourceNotFoundException("User Not Found"));
 		return findByEmail;
 	}
-	
-	
-	
 
 }

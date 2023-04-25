@@ -30,56 +30,53 @@ import com.ecom.payload.OrderRequest;
 public class OrderController {
 	@Autowired
 	OrderService orderService;
-	
-	
+
 	@PostMapping("/")
-	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest request,Principal principal){
-		//String username="malit@gmail.com";
-		     OrderDto create = orderService.create(request,principal.getName());
-		
-	   return new ResponseEntity<OrderDto>(create,HttpStatus.CREATED);
+	public ResponseEntity<OrderDto> createOrder(@RequestBody OrderRequest request, Principal principal) {
+		// String username="malit@gmail.com";
+		OrderDto create = orderService.create(request, principal.getName());
+
+		return new ResponseEntity<OrderDto>(create, HttpStatus.CREATED);
 	}
-	
-	//Getting all Order from user
+
+	// Getting all Order from user
 	@GetMapping("/")
-	public ResponseEntity<List<OrderDto>>getOrderByUser(Principal p){
-	          
-		      List<OrderDto> allOrder = this.orderService.getAllOrder(p.getName());
-		
-		return new ResponseEntity<List<OrderDto>>(allOrder,HttpStatus.OK);
+	public ResponseEntity<List<OrderDto>> getOrderByUser(Principal p) {
+
+		List<OrderDto> allOrder = this.orderService.getAllOrder(p.getName());
+
+		return new ResponseEntity<List<OrderDto>>(allOrder, HttpStatus.OK);
 	}
-	
-	//Getting all Order 
+
+	// Getting all Order
 	@GetMapping("/list")
-	public ResponseEntity<List<OrderDto>>getAllOrder(){
-		   List<OrderDto> listAllOrder = this.orderService.listAllOrder();
-		return new ResponseEntity<List<OrderDto>>(listAllOrder,HttpStatus.OK);
+	public ResponseEntity<List<OrderDto>> getAllOrder() {
+		List<OrderDto> listAllOrder = this.orderService.listAllOrder();
+		return new ResponseEntity<List<OrderDto>>(listAllOrder, HttpStatus.OK);
 	}
-	
-	
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<ApiResponse> delete(@PathVariable int id){
-		
-		  this.orderService.deleteOrder(id);
-		
-		return new ResponseEntity<ApiResponse>(new ApiResponse("Order Deleted",true),HttpStatus.OK);
+	public ResponseEntity<ApiResponse> delete(@PathVariable int id) {
+
+		this.orderService.deleteOrder(id);
+
+		return new ResponseEntity<ApiResponse>(new ApiResponse("Order Deleted", true), HttpStatus.OK);
 	}
-	@PreAuthorize("hasRole('ADMIN')")   
+
+	@PreAuthorize("hasRole('ADMIN')")
 	@PutMapping("/{id}")
-	public ResponseEntity<OrderDto>update(@Valid @PathVariable int id,@RequestBody OrderDto orderDto){
-		
+	public ResponseEntity<OrderDto> update(@Valid @PathVariable int id, @RequestBody OrderDto orderDto) {
+
 		OrderDto updateOrder = this.orderService.updateOrder(id, orderDto);
-		return new ResponseEntity<OrderDto>(updateOrder,HttpStatus.OK);
+		return new ResponseEntity<OrderDto>(updateOrder, HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/s/{id}")
-   public ResponseEntity<OrderDto>getByOrderId(@PathVariable int id){
-	   
-	   OrderDto order = this.orderService.getOrder(id);
-	   
-	   
-	   return new ResponseEntity<OrderDto>(order,HttpStatus.OK);
-   }
+	public ResponseEntity<OrderDto> getByOrderId(@PathVariable int id) {
+
+		OrderDto order = this.orderService.getOrder(id);
+
+		return new ResponseEntity<OrderDto>(order, HttpStatus.OK);
+	}
 
 }

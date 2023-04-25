@@ -41,7 +41,7 @@ public class AuthController {
 		UserDetails UserDetail = this.userDrtailsservice.loadUserByUsername(request.getUsername());
 		
 		/*  
-		 * if username and password both are Correct then get token by line no *47
+		 * if username and password both are Correct then get token by line no *50
 		 * create jwtResponse(this class created by my) object
 		 * Under JwtResponse class there is entity token
 		 * 
