@@ -47,12 +47,13 @@ function CustomNavbar(value) {
       const val = data;
       const id = (val[0].category.categoryId)
       console.log(data)
-      setProd(data);
-      // {<SearchBarProduct  setProd= {data}/>}
-      
-      // navigate(`/searchbar`)
-      // getProduct()
+      // setProd(data);
+      const n= event.target.value;
+      navigate("/searchbar")
+      {<SearchBarProduct  prop= {data} productNa = {n}/>}
       setProductName(event.target.value);
+
+      // getProduct()
 
       if (data.length === 0) {
         // toast.error("product not found")

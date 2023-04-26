@@ -1,6 +1,6 @@
 import { http, PrivateHttp } from "./axios-helper";
 
-export const loadProducts = (pageNumber = "0", pageSize = "2", sortBy = "productId", sortDir = "desc") => {
+export const loadProducts = (pageNumber = "0", pageSize = "3", sortBy = "productId", sortDir = "desc") => {
   return http.get(`/product/?pageNumber=${pageNumber}&pageSize=${pageSize}&sortBy=${sortBy}&sortDir=${sortDir}`).then(response => response.data)
 }
 

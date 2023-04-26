@@ -77,6 +77,20 @@ public void setCart(Cart cart) {
 		this.roles = roles;
 	}
 	
+	public User(String name, String email, String password, String address, String about, String gender, String phone,
+			Date date, boolean active) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.about = about;
+		this.gender = gender;
+		this.phone = phone;
+		this.date = date;
+		this.active = active;
+	}
+	
 	public User(int userId, String name, String email, String password, String address, String about, String gender,
 			String phone, Date date, boolean active) {
 		super();

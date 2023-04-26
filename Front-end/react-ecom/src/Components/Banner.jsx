@@ -31,7 +31,7 @@ function Banner() {
   infinite={true}
   autoPlay={true}
   autoPlaySpeed={4000}
-  className='mt-5'
+  className='mt-5 '
     >
         {
             bannerData.map((data,index)=>(
