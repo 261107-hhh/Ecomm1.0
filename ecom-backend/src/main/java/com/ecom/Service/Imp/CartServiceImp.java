@@ -45,7 +45,7 @@ public class CartServiceImp implements CartService {
 
 	@Override
 	public CartDto addItem(ItemRequest item, String UserName) {
-
+		System.out.println("saved in repository 1");
 		int productId = item.getProductId();
 		int productQuntity = item.getQuantity();
 
@@ -107,7 +107,7 @@ public class CartServiceImp implements CartService {
 		// iteams.addAll(iteams);
 
 		Cart updateCart = this.catRepo.save(cart);
-
+		System.out.println("saved in repository 101");
 		return this.mapper.map(updateCart, CartDto.class);
 	}
 

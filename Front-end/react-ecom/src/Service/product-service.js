@@ -56,9 +56,12 @@ export const update = (product, productId) => {
 }
 
 export const searchProduct = (event) => {
-  console.log(event.target.value)
+  // console.log(event.target.value+" search product handler service");
   return PrivateHttp.get(`/product/search/${event.target.value}`
   ).then(res => res.data);
+  // console.log(event+" search product handler service")
+  // return PrivateHttp.get(`/product/search/${event}`
+  // ).then(res => res.data);
 
 }
 

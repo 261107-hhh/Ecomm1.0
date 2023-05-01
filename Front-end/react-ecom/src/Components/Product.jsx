@@ -19,9 +19,9 @@ function Product({ product, addToCart }) {
 
     const getProductHtml = () => {
         return (
-            <Card className='mt-2 border-0 shadow-sm'  style={{ 'width': '100%'}}>
+            <Card className='mt-2 border-0 shadow-sm' style={{ 'width': '100%' }}>
 
-                <div style={{ 'width': '100%', 'height': '300px', 'marginBottom':'0px' }}>
+                <div style={{ 'width': '100%', 'height': '300px', 'marginBottom': '0px' }}>
                     <img style={imagesStyle} src={Base_url + '/products/images/' + product.productId} alt="" />
                 </div>
                 <CardBody style={{ 'padding': '0px 0px 0px 19px;' }}>
@@ -31,7 +31,8 @@ function Product({ product, addToCart }) {
 
                 </CardText>
 
-                <CardText style={{'fontSize':'22px','margin-bottom': '1px'
+                <CardText style={{
+                    'fontSize': '22px', 'margin-bottom': '1px'
                 }}  >
 
                     <span>
@@ -39,7 +40,7 @@ function Product({ product, addToCart }) {
                         {product.category.title}
                     </span>
                 </CardText>
-                <CardText  style={{'margin-bottom': '1px'}}><h5>Prize:₹{product.productPrize}</h5></CardText>
+                <CardText style={{ 'margin-bottom': '1px' }}><h5>Prize:₹{product.productPrize}</h5></CardText>
                 <Container className='text-'>
                     <Button tag={Link} to={'/viewproduct/' + product.productId} size='sm' className='my-3' color='success' >View Product</Button>
 
@@ -52,8 +53,10 @@ function Product({ product, addToCart }) {
 
     }
 
-    return (
-        (product) && getProductHtml()
+    return (<>
+        <br></br>
+        {(product) && getProductHtml()}
+    </>
     )
 }
 

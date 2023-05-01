@@ -34,10 +34,10 @@ import com.ecom.payload.ProductDto;
 import com.ecom.payload.ProductResponse;
 import org.springframework.http.MediaType;
 import com.ecom.config.AppConstants;
-
+	
 @RestController
 @RequestMapping("/")
-
+@CrossOrigin("*")
 public class ProductController {
 
 	@Autowired
@@ -142,9 +142,9 @@ public class ProductController {
 	@GetMapping("product/search/{name}")
 	public ResponseEntity<List<ProductDto>> findbyName(@PathVariable String name) {
 
-		System.out.println(name);
+		System.out.println(name+" name of product");
 		List<ProductDto> findProduct = this.productService.findProduct(name);
-
+		System.out.println("data sent is "+ findProduct);
 		return new ResponseEntity<List<ProductDto>>(findProduct, HttpStatus.OK);
 	}
 

@@ -89,11 +89,24 @@ public class ProductDto {
 		this.imageName = imageName;
 	}
 
+	public ProductDto(@Pattern(regexp = "/^[A-Z]-[A-Z]{3,5}\\/[\\d]{2}\\/[\\d]{3}$/") String productName,
+			@NotEmpty String productDesc,
+			@Size(min = 0, message = "prize Should be greater than 0") @NotEmpty double productPrize, boolean stock,
+			@Size(min = 1, message = "Quntity must Should  be greater 0") int productQuantity, boolean live) {
+		super();
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.productPrize = productPrize;
+		this.stock = stock;
+		this.productQuantity = productQuantity;
+		this.live = live;
+	}
+
 	public ProductDto(@NotEmpty @Size(min = 0, message = "Id should be Greater then 0") int productId,
 			@Pattern(regexp = "/^[A-Z]-[A-Z]{3,5}\\/[\\d]{2}\\/[\\d]{3}$/") String productName,
 			@NotEmpty String productDesc,
 			@Size(min = 0, message = "prize Should be greater than 0") @NotEmpty double productPrize, boolean stock,
-			@Size(min = 1, message = "Quntity must Should  be greater 0") int productQuantity, boolean live,
+			@Size(min = 1, message = "Quntity must Should  be greater 0") int productQuantity, boolean live, 
 			String imageName) {
 		super();
 		this.productId = productId;

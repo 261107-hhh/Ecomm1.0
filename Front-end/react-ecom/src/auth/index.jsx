@@ -1,17 +1,17 @@
 
-export const login = (data,next) => {
+export const login = (data, next) => {
   localStorage.setItem("data", JSON.stringify(data));
-  next(); 
-  
+  next();
+
 };
- const clearStorage=()=>{
-  let session=sessionStorage.getItem("data");
-  if(session==null){
+const clearStorage = () => {
+  let session = sessionStorage.getItem("data");
+  if (session == null) {
     localStorage.removeItem("data")
   }
-  sessionStorage.setItem("data",1)
- }
-window.addEventListener('load',clearStorage)
+  sessionStorage.setItem("data", 1)
+}
+window.addEventListener('load', clearStorage)
 //logout
 export const logout = (next) => {
   localStorage.removeItem("data");
@@ -27,7 +27,7 @@ export const checkLogin = () => {
       return true;
     }
   }
-  
+
 
   return false;
 };
@@ -44,9 +44,9 @@ export const getToken = () => {
 
 //getCurrentUser
 export const getCurrentUser = () => {
-  
+
   if (checkLogin()) {
-    
+
     const user = JSON.parse(localStorage.getItem("data")).user;
     return user;
   } else {
@@ -56,8 +56,8 @@ export const getCurrentUser = () => {
 
 
 // admin Login 
-export const adminLogin=()=>{
-  let user=getCurrentUser();
-   let flag=user.roles.find(r=>r.id===5245)
-  return flag?true:false;
+export const adminLogin = () => {
+  let user = getCurrentUser();
+  let flag = user.roles.find(r => r.id === 5245)
+  return flag ? true : false;
 }

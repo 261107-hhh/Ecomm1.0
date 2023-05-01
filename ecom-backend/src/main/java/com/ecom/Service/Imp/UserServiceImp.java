@@ -27,8 +27,11 @@ public class UserServiceImp implements UserService {
 	@Override
 	public UserDto create(UserDto userDto) {
 		  User user=this.toEntity(userDto);
-		        
-		  Role role = this.roleRepository.findById(7412).get();
+		  int roleId =7412;
+		  if(!userRepositroy.existsById(1)) {
+			  roleId = 5245;
+		  }
+		  Role role = this.roleRepository.findById(roleId).get();
 		   user.getRoles().add(role);
 		  User userCreate=this.userRepositroy.save(user);
 	

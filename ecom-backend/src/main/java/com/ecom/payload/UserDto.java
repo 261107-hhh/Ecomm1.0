@@ -11,6 +11,26 @@ import java.util.Set;
 public class UserDto {
 	
 	
+	public UserDto() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public UserDto(
+			@NotEmpty @Size(min = 4, max = 50, message = "name must should be 4 and 50") @Pattern(regexp = "^[A-Za-z][A-Za-z0-9_]{7,29}$", message = "Invalid username !!") String name,
+			@Email(message = "Enter Vaild Email") String email,
+			@NotEmpty @Size(min = 6, max = 10, message = "password should be 6 to 10") String password, String address,
+			String about, String gender, Date date, boolean active, @NotBlank String phone) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.address = address;
+		this.about = about;
+		this.gender = gender;
+		this.date = date;
+		this.active = active;
+		this.phone = phone;
+	}
 	private int userId;
 	
 	@NotEmpty

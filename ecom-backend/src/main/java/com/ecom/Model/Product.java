@@ -106,5 +106,38 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
 
+	public Product() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Product(String productName, String productDesc, double productPrize, boolean stock, int productQuantity,
+			boolean live, String imageName) {
+		super();
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.productPrize = productPrize;
+		this.stock = stock;
+		this.productQuantity = productQuantity;
+		this.live = live;
+		this.imageName = imageName;
+	}
+
+	public Product(int productId, String productName, String productDesc, double productPrize, boolean stock,
+			int productQuantity, boolean live, String imageName) {
+		super();
+		this.productId = productId;
+		this.productName = productName;
+		this.productDesc = productDesc;
+		this.productPrize = productPrize;
+		this.stock = stock;
+		this.productQuantity = productQuantity;
+		this.live = live;
+		this.imageName = imageName;
+	}
+
+	
+	
 }
